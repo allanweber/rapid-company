@@ -1,0 +1,54 @@
+server:
+  port: ${PORT:8081}
+management:
+  metrics:
+    tags:
+      - name: application
+        value: ${spring.application.name}
+      - name: environment
+        value: ${ENVIRONMENT:local}
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health, metrics, prometheus
+  health:
+    probes:
+      enabled: true
+spring:
+  application:
+    name: company
+  data:
+    mongodb:
+      database: rapid
+      uri: mongodb+srv:/:/${MONGO_USERuser}:${MONGO_PASS:user}@${MONGO_HOST:host}/rapid?retryWrites=true&w=majority&serverSelectionTimeoutMS=2000&connectTimeoutMS=2000
+eureka:
+  password: ${EUREKA_USER_PASSWORD:password}
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: https://user:${eureka.password}@rapid-eureka.herokuapp.com/eureka/
+  instance:
+    hostname: rapid-company.herokuapp.com
+    nonSecurePort: 80
+
+java-core:
+  swagger:
+    base-package: com.job.rapid.company.api
+    contact:
+      name: Allan Weber
+      url: https://allanweber.dev
+      email: a.cassianoweber@gmail.com
+    api-data:
+      title: Rapid Company
+      description: Handle conpanies
+      version: 0.1
+      license: MIT
+  security:
+    secure: true
+    paths:
+      high-security-paths: /companies/**
+    token:
+      secret: ${TOKEN_SECRET}
+      issuer: ${TOKEN_ISSUER}
+      audience: ${TOKEN_AUDIENCE}

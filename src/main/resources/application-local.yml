@@ -1,0 +1,26 @@
+spring:
+  data:
+    mongodb:
+      database: local-rapid
+      uri: mongodb://${MONGO_HOST:localhost:27017}/local-rapid?serverSelectionTimeoutMS=2000&connectTimeoutMS=2000
+#eureka:
+#  client:
+#    enabled: false
+eureka:
+  password: ${EUREKA_USER_PASSWORD:password}
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://user:${eureka.password}@localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    nonSecurePort: 8081
+java-core:
+  security:
+    admin-password: AckN%b51zUgOu$SE
+    email-verification: false
+    secure: true
+    token:
+      secret: 1_sEQNtLZ33v4Ynye4tQ8pJ8lOhmjMNEs7XI-nJ0s6lKjyTMHmK7Gpfnz1xQmoF6zSlQMe4t34wua-YHeX4aCj3W5q9Ty3MPP7I1ULC3B9InNq8Y4_SpwciizpH7wsUlfEO1VAtV6MxSXhBaoYY1yI4UWRYvtAMH_idWiIA-y25x1KBF5slm9ry6DZa5t0mFpXzqFXjsrcxF724B_zKl--Ka-yG_jDdD-iPxyr8EWOIZgs2TVkgAn_jZ3-1VvH-HPvtCBrDdbVAc4NVK-o04Uyf2y-Fb72naYQbfFLkMk9_NCIpG6TpGeEGQR9e5wO0A87mzEGtTHDAV85WE5uXDw
+      issuer: https://rapid-recuiter.com
+      audience: f9683640-1588-11ec-82a8-0242ac130003
